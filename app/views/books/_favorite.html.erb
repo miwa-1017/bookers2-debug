@@ -1,0 +1,12 @@
+<% if book.favorited_by?(current_user) %>
+  <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <i class="fas fa-heart" style="color: red;"></i>
+  <% end %>
+<% else %>
+  <%= link_to book_favorites_path(book), method: :post,remote: true do %>
+    <i class="far fa-heart"></i>
+  <% end %>
+<% end %>
+
+ <%= book.favorites.count %>
+  <span>コメント数：<%= book.book_comments.count %> </span>

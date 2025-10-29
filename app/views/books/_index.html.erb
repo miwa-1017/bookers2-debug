@@ -16,6 +16,11 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
+        <td>
+          <div id="favorite-btn-<%= book.id %>">
+            <%= render 'books/favorite', book: book %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
