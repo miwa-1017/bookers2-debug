@@ -1,0 +1,24 @@
+<h2>Follower Users</h2>
+
+<% if @users.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image, size: "50x50" %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to "Show", user_path(user), class: "btn btn-outline-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>
