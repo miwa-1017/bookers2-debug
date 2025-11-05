@@ -23,7 +23,8 @@
               <i class="fas fa-book-open"></i> Books
             <% end %>
           </li>
-          <li>
+
+          <li>   
             <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> Log out
             <% end %>
@@ -54,4 +55,15 @@
       </div>
     </div>
   </nav>
+  
+  <% if user_signed_in? && controller.controller_name != 'homes' %>
+    <div class="d-flex justify-content-center mt-3 mb-3">
+      <%= form_with(url: search_path, method: :get, local: true, class: "d-flex w-50 justify-content-center") do |form| %>
+        <%= form.text_field :word, placeholder: "検索ワード", class: "form-control me-2" %>
+        <%= form.select(:range, [["User","User"],["Book","Book"]],{}, { class: "form-select me-2"}) %>
+        <%= form.select(:search, [["完全一致", "perfect_match"],["前方一致","forward_match"], ["後方一致","backward_match"],["部分一致","partial_match"]], {}, {class: "form-select me-2" }) %>
+        <%= form.submit "検索", class: "btn btn-outline-dark" %>
+      <% end %>
+   </div>
+  <% end %>
 </header>
