@@ -17,6 +17,7 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          <td><%= @book.tag_list.join(',') %></td>
           <td style="white-space: nowrap; vertical-align: middle;">
             <span style="display: inline-block; margin-right: 6px;">
               <%= render 'favorites/favorite-btn', book: @book %>

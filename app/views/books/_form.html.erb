@@ -12,7 +12,10 @@
     <%= f.label :rate, "Rate" %><br>
     <div id="post_raty"></div>
   </div>
-
+  <div class="form-group">
+    <%= f.label :tag_list, "Tag" %><br>
+    <%= f.text_field :tag_list, class: 'form-control' %>
+  </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>

@@ -58,9 +58,16 @@ only: [:edit, :update, :destroy]
     redirect_to books_path
   end
 
+  def search_tag
+    @user = current_user
+    @book_new = Book.new
+    @tag = params[:tag]
+    @books = Book.tagged_with(@tag)
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :rate)
+    params.require(:book).permit(:title, :body, :rate, :tag_list)
   end
 end

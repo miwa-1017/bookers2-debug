@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   end
   has_many :favorited_users,through: :favorites, source: :user
   has_many :book_comments, dependent: :destroy
+  acts_as_taggable_on :tags
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
