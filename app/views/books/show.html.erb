@@ -8,17 +8,50 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
-  		<table class='table'>
+  		<table class='table align-middle'>
   		  <tr>
-          <td><%= link_to(@book.user) do %>
-            <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
-            <%= @book.user.name %>
+          <td style="width:70px;"><%= link_to(@book.user) do %>
+            <%= image_tag @book.user.get_profile_image, size:"50x50" %><br>
+            <span style="font-size: 12px; white-space: nowrap;"><%= @book.user.name %>
             <% end %>
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <td><div class="favorite-btn"><%= render 'favorites/favorite-btn', book: @book %>
+          <td>
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <%= render 'favorites/favorite-btn', book: @book %>
+            </div>
+              <div class="mr-3">
+          コメント数: <%= @book.book_comments.count %>
               </div>
+          <div id="show-star-rate" class="mr-3"></div>
+
+          <% if @book.user == current_user %>
+            <%= link_to "Edit",
+          edit_book_path(@book), class: "btn btn-success" %>&nbsp
+          <%= link_to "Destroy",
+          book_path(@book), method: :delete, class: "btn btn-danger", date: { confirm: "本当に削除しますか？" } %>
+        <% end %>
+    </div>
+
+            <script>
+
+            document.addEventListener("DOMContentLoaded", () => {
+              const elem =
+            document.querySelector("#show-star-rate");
+              if (elem) {
+                const opt = {
+                  starOn: "/assets/star-on.png",
+                  starOff: "/assets/star-off.png",
+                  starHalf: "/assets/star-half.png",
+                  readOnly: true,
+                  score: <%= @book.rate %>
+                };
+                raty(elem,opt);
+                }
+              });
+            </script>
           </td>
         </tr>
       </table>
