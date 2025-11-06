@@ -24,3 +24,31 @@ window.raty = function(elem,opt) {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener("turbolinks:load", () => {
+
+document.querySelectorAll("[id^='show-star-rate-']").forEach((elem) => {
+  const opt = {
+      starOn: "/assets/star-on.png",
+      starOff: "/assets/star-off.png",
+      starHalf: "/assets/star-half.png",
+      readOnly: true,
+      score: elem.dataset.score
+    };
+    raty(elem,opt);
+    });
+  });
+
+    document.addEventListener("turbolinks:load", () => {
+      const postElem = document.querySelector('#post_raty');
+      if (postElem){
+      raty(postElem, {
+          starOn: "/assets/star-on.png",
+          starOff: "/assets/star-off.png",
+          starHalf: "/assets/star-half.png",
+          scoreName: "book[rate]",
+        });
+       } 
+      });
+
+   

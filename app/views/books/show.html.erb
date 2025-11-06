@@ -17,49 +17,35 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <td>
-          <div class="d-flex align-items-center">
-            <div class="mr-2">
+          <td style="white-space: nowrap; vertical-align: middle;">
+            <span style="display: inline-block; margin-right: 6px;">
               <%= render 'favorites/favorite-btn', book: @book %>
-            </div>
-              <div class="mr-3">
+            </span>
+            <span style="margin-right: 6px;">
           コメント数: <%= @book.book_comments.count %>
-              </div>
-          <div id="show-star-rate" class="mr-3"></div>
+            </span>
+          <div id="show-star-rate-<%= @book.id %>" 
+              class="mr-3"
+              data-score="<%= @book.rate %>"
+              style="display: inline-block;">
+          </div>
 
           <% if @book.user == current_user %>
             <%= link_to "Edit",
           edit_book_path(@book), class: "btn btn-success" %>&nbsp
           <%= link_to "Destroy",
           book_path(@book), method: :delete, class: "btn btn-danger", date: { confirm: "本当に削除しますか？" } %>
-        <% end %>
+          <% end %>
+          </td>
     </div>
-
-            <script>
-
-            document.addEventListener("DOMContentLoaded", () => {
-              const elem =
-            document.querySelector("#show-star-rate");
-              if (elem) {
-                const opt = {
-                  starOn: "/assets/star-on.png",
-                  starOff: "/assets/star-off.png",
-                  starHalf: "/assets/star-half.png",
-                  readOnly: true,
-                  score: <%= @book.rate %>
-                };
-                raty(elem,opt);
-                }
-              });
-            </script>
           </td>
         </tr>
       </table>
-              <div class="comments-area">
-                <%= render 'book_comments/comments', book: @book %>
-              </div>
+        <div class="comments-area">
+          <%= render 'book_comments/comments', book: @book %>
+        </div>
 
-              <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
-    </div>
+        <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
+
   </div>
 </div>

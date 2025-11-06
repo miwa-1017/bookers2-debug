@@ -18,7 +18,14 @@ only: [:edit, :update, :destroy]
 
   def index
     @book = Book.new
-    @books = Book.all
+    if params[:sort] == "new"
+      @books =
+  Book.order(created_at: :desc)
+    elsif params[:sort] == "high_rate"
+      @books = Book.order(rate: :desc)
+    else
+      @books = Book.all
+    end
   end
 
   def create

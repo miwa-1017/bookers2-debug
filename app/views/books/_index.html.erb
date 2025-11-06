@@ -16,10 +16,14 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-        <td>
-          <div id="favorite-btn-<%= book.id %>">
+          <td style="white-space: nowrap; vertical-align: middle;">
+            <div style="display: inline-block;">
             <%= render 'books/favorite', book: book %>
-          </div>
+            <span style="margin-left: 6px;">
+        コメント数: <%= book.book_comments.count %></span>
+            </div>
+           <div id="show-star-rate-<%= book.id %>" data-score="<%= book.rate %>" style="display: inline-block;margin-left: 6px;"></div>
+          </td>
         </td>
       </tr>
     <% end %>

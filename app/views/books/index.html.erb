@@ -8,6 +8,13 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
+
+      <div class="mb-3">
+        <%= link_to '新しい順',
+        books_path(sort: 'new'), class: "btn btn-outline-primary btn-sm mr-2" %>
+        <%= link_to '評価の高い順',
+        books_path(sort: 'high_rate'), class: "btn btn-outline-primary btn-sm" %>
+      </div>
       <%= render 'index', books: @books%>
     </div>
   </div>
