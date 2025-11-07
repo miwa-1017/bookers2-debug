@@ -21,13 +21,15 @@
           </td>
         <td><%= link_to book.title,book_path(book) %></td>
         <td><%= book.body %></td>
-        <td><%= book.tag_list.join(',') %></td>
+        <td><% book.tag_list.each do |tag| %><%= link_to tag,search_tag_path(tag: tag), class:"text-decoration-none me-2" %>
+            <% end %>
+        </td>
         <td><%= render 'books/favorite', book: book %>いいね
             <span style="margin-left: 6px;">
         コメント数: <%= book.book_comments.count %></span>
         </td>
         <td>
-           <div id="show-star-rate-<%= book.id %>" data-score="<%= book.rate %>"></div>
+          <div id="show-star-rate-<%= book.id %>" data-score="<%= book.rate %>"></div>
         </td>
       </tr>
     <% end %>

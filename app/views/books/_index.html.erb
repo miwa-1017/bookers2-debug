@@ -17,7 +17,8 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-        <td><%= book.tag_list.join(',') %></td>
+        <td><% book.tag_list.each do |tag| %><%= link_to tag,search_tag_path(tag: tag), class:"text-decoration-none me-2" %>
+            <% end %></td>
           <td style="white-space: nowrap; vertical-align: middle;">
             <div style="display: inline-block;">
             <%= render 'books/favorite', book: book %>
