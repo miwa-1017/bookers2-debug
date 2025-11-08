@@ -21,6 +21,10 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :followers, through: :passive_relationships,
                        source: :follower
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :rooms, through: :entries
+  has_many :view_counts, dependent: :destroy
 
   has_one_attached :profile_image
 

@@ -12,6 +12,9 @@ only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
+    unless ViewCount.exists?(user_id: current_user.id, book_id: @book.id)
+      current_user.view_counts.create(book_id: @book.id)
+    end
     @new_book = Book.new
     @book_comment = BookComment.new
   end
@@ -19,12 +22,13 @@ only: [:edit, :update, :destroy]
   def index
     @book = Book.new
     if params[:sort] == "new"
-      @books =
-  Book.order(created_at: :desc)
+      @books = Book.created_within_week.order(created_at: :desc)
     elsif params[:sort] == "high_rate"
-      @books = Book.order(rate: :desc)
+      @books = Book.created_within_week.order(rate: :desc)
+    elsif params[:sort] == "favorite"
+      @books = Book.created_within_week.sort_by_favorites
     else
-      @books = Book.all
+      @books = Book.created_within_week
     end
   end
 

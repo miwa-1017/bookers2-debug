@@ -14,9 +14,11 @@
         <%= link_to '新しい順',
         books_path(sort: 'new'), class: "btn btn-outline-primary btn-sm mr-2" %>
         <%= link_to '評価の高い順',
-        books_path(sort: 'high_rate'), class: "btn btn-outline-primary btn-sm" %>
+        books_path(sort: 'high_rate'), class: "btn btn-outline-primary btn-sm mr-2" %>
+        <%= link_to 'いいね順',
+        books_path(sort: "favorite"), class: "btn btn-outline-primary btn-sm" %>
       </div>
-      <%= render 'index', books: @books%>
+      <%= render 'index', books: @books %>
     </div>
   </div>
 </div>

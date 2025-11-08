@@ -20,12 +20,13 @@
         <td><% book.tag_list.each do |tag| %><%= link_to tag,search_tag_path(tag: tag), class:"text-decoration-none me-2" %>
             <% end %></td>
           <td style="white-space: nowrap; vertical-align: middle;">
-            <div style="display: inline-block;">
+            <div id="favorite-button-<%= book.id %>" style="display: inline-block;">
             <%= render 'books/favorite', book: book %>
+            </div>
             <span style="margin-left: 6px;">
         コメント数: <%= book.book_comments.count %></span>
-            </div>
            <div id="show-star-rate-<%= book.id %>" data-score="<%= book.rate %>" style="display: inline-block;margin-left: 6px;"></div>
+           閲覧数: <%= book.view_counts.count %>
           </td>
         </td>
       </tr>

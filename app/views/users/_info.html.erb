@@ -27,6 +27,12 @@
     <% end %>
 <% end %>
 
+<% if current_user != @user %>
+  <% if (current_user.followings.include?(@user)) && (@user.followings.include?(current_user)) %>
+    <%= link_to "チャットを始める", rooms_path(user_id: @user.id), method: :post, class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
 <div class='row'>
 <% if user == current_user %>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>

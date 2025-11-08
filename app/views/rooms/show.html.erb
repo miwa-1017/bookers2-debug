@@ -1,0 +1,23 @@
+<h2>💬 <%= @entries.map{ |e| e.user == current_user ? e.user.name : "#{e.user.name}さん" }.join("と") %> のチャットルーム</h2>
+
+<div class="messages-box">
+  <% @messages.each do |message| %>
+    <p>
+      <strong><%= message.user.name %></stong>
+      <%= message.content %>
+    </p>
+  <% end %>
+</div>
+<% if @message.errors.any? %>
+  <div class="alert alert-danger">
+    <%= @message.errors.full_messages.join(",") %>
+  </div>
+<% end %>
+
+<%= form_with model: @message, url: messages_path, local: true do |f| %>
+  <div>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.text_field :content, placeholder: "メッセージを入力", size: 40 %>
+    <%= f.submit "送信", class: "btn btn-primary" %>
+  </div>
+<% end %>

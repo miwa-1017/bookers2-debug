@@ -20,7 +20,7 @@
           <td><%= @book.tag_list.join(',') %></td>
           <td style="white-space: nowrap; vertical-align: middle;">
             <span style="display: inline-block; margin-right: 6px;">
-              <%= render 'favorites/favorite-btn', book: @book %>
+              <%= render 'books/favorite', book: @book %>
             </span>
             <span style="margin-right: 6px;">
           コメント数: <%= @book.book_comments.count %>
@@ -30,6 +30,8 @@
               data-score="<%= @book.rate %>"
               style="display: inline-block;">
           </div>
+
+          閲覧数: <%= @book.view_counts.count %>
 
           <% if @book.user == current_user %>
             <%= link_to "Edit",
